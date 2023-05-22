@@ -12,7 +12,7 @@ function App() {
   const data = {
     title: "Драконьи кулаки",
     price: "570",
-    weight: "360гр"
+    weight: "360гр",
   }
 
   return (
