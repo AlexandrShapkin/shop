@@ -7,32 +7,27 @@ import Header from "./components/Header/Header";
 import MenuBar from "./components/UI/MenuBar/MenuBar";
 import Footer from "./components/Footer/Footer";
 import ProductCard from "./components/UI/ProductCard/ProductCard";
+import ProductsContent from "./components/UI/ProductsContent/ProductsContent";
 
 function App() {
-  const data = {
-    title: "Драконьи кулаки",
-    price: "570",
-    weight: "360гр",
-  }
+  const product = {
+    photo: dumplings,
+    data: {
+      title: "Драконьи кулаки",
+      price: "570",
+      weight: "360гр",
+    },
+  };
+
+  let products = Array(50).fill(product);
 
   return (
     <div className="App">
       <Header logo={logo} />
       <MenuBar />
-      <main className="p-10 bg-white dark:bg-slate-600 text-slate-900 dark:text-white">
-        {/* <div>
-          <h1>Новинки</h1>
-        </div>
-        <div>
-          <h1>Акции</h1>
-        </div>
-        <div>
-          <h1>Пельмни</h1>
-        </div>
-        <div>
-          <h2>Напитки</h2>
-        </div> */}
-        <ProductCard photo={dumplings} productData={data} />
+      <main className="flex flex-col justify-between bg-white dark:bg-slate-600 text-slate-900 dark:text-white">
+        <ProductsContent title={"Пельмени"} products={products} />
+        {/* <hr className="w-4/5 mx-auto border border-y-zinc-400 dark:border-y-zinc-200 border-t-0" /> */}
       </main>
       <Footer />
     </div>
