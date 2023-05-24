@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FaGithub } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Footer() {
   const Footer = styled.footer``;
@@ -20,10 +21,10 @@ function Footer() {
           </address>
         </FooterContent>
         <FooterContent>
-          <a>Работать у нас</a>
+          <Link to="/vacancies">Работать у нас</Link>
         </FooterContent>
         <FooterContent>
-          <a>
+          <a href="https://github.com/AlexandrShapkin/shop">
             <FaGithub className="inline" /> GitHub проекта
           </a>
         </FooterContent>

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FaShoppingCart } from "react-icons/fa";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
+import { Link } from "react-router-dom";
 
 function MenuBar() {
   const MenuItem = styled.li`
@@ -10,7 +11,7 @@ function MenuBar() {
       cursor: pointer;
     }
   `;
-  const Cart = styled.a`
+  const Cart = styled.div`
     padding: 5px 10px;
     &:hover {
       background-color: rgba(0, 0, 0, 0.3);
@@ -18,23 +19,25 @@ function MenuBar() {
     }
   `;
   return (
-    <div className="bg-white dark:bg-slate-700 text-slate-900 dark:text-white">
+    <div className="sticky top-0 z-10 bg-white dark:bg-slate-700 text-slate-900 dark:text-white">
       <nav className="flex justify-between my-auto">
         <ul className="flex">
           <MenuItem>
-            <a href="">Меню</a>
+            <Link to="/products">Меню</Link>
           </MenuItem>
           <MenuItem>
-            <a href="">О нас</a>
+            <Link to="/about">О нас</Link>
           </MenuItem>
           <MenuItem>
-            <a href="">Вакансии</a>
+            <Link to="/vacancies">Вакансии</Link>
           </MenuItem>
         </ul>
 
         <div className="flex">
           <Cart>
-            <FaShoppingCart className="text-slate-900 dark:text-white h-full" />
+            <Link to="/cart">
+              <FaShoppingCart className="text-slate-900 dark:text-white h-full" />
+            </Link>
           </Cart>
           <ThemeSwitcher />
         </div>
