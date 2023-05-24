@@ -1,4 +1,4 @@
-import photo from "../about.jpg";
+import photo from "../about.png";
 
 function AboutPage() {
   return (
