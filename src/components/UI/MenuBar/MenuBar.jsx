@@ -22,15 +22,15 @@ function MenuBar() {
     <div className="sticky top-0 z-10 bg-white dark:bg-slate-700 text-slate-900 dark:text-white">
       <nav className="flex justify-between my-auto">
         <ul className="flex">
-          <MenuItem>
-            <Link to="/products">Меню</Link>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/about">О нас</Link>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/vacancies">Вакансии</Link>
-          </MenuItem>
+          <Link to="/products">
+            <MenuItem>Меню</MenuItem>
+          </Link>
+          <Link to="/about">
+            <MenuItem>О нас</MenuItem>
+          </Link>
+          <Link to="/vacancies">
+            <MenuItem>Вакансии</MenuItem>
+          </Link>
         </ul>
 
         <div className="flex">

@@ -9,7 +9,7 @@ function ProductsContent({ title, products }) {
     margin: 1.75rem;
     margin-top: 0;
   `;
-
+  let key = 0;
   return (
     <Wrapper className="max-w-screen-lg w-full mx-auto my-5">
       <Title>{title}</Title>
@@ -19,6 +19,7 @@ function ProductsContent({ title, products }) {
             className="mx-2 mb-2"
             photo={product.photo}
             productData={product.data}
+            key={Date.now() + key++}
           />
         ))}
       </div>
