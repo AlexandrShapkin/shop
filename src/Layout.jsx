@@ -10,7 +10,9 @@ function Layout() {
     <div className="App">
       <Header logo={logo} />
       <MenuBar />
-        <Outlet />
+      <div className="min-h-screen bg-white dark:bg-slate-600 text-slate-900 dark:text-white">
+      <Outlet />
+      </div>
       <Footer />
     </div>
   );

@@ -1,27 +1,33 @@
 import { FaRubleSign } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-function ProductCard({ photo, productData, className }) {
+function ProductCard({ product, className }) {
   return (
-    <div className={[className, "w-full sm:w-40 overflow-hidden rounded-md drop-shadow-lg bg-slate-50 dark:bg-slate-500"].join(" ")}>
-      <figure className="hover:bg-slate-200 hover:dark:bg-slate-800">
-        <a href="#">
+    <div
+      className={[
+        className,
+        "w-full sm:w-40 overflow-hidden rounded-md drop-shadow-lg hover:bg-slate-200 hover:dark:bg-slate-800 bg-slate-50 dark:bg-slate-500",
+      ].join(" ")}
+    >
+      <figure className="">
+        <Link to={"/products/" + product?.id}>
           <img
-            src={photo}
+            src={product?.photo}
             loading="lazy"
             alt=""
             className="object-scale-down object-center"
           />
-          <figcaption className="p-3">
-            <h3 className="text-sm">{productData?.title}</h3>
+          <figcaption className="p-3 flex justify-between h-22 sm:h-28 flex-col">
+            <h3 className="text-sm">{product?.data.title}</h3>
             <div className="text-xs flex justify-between mt-2 text-zinc-500 dark:text-zinc-200">
               <p>
-                {productData?.price}
+                {product?.data.price}
                 <FaRubleSign className="inline" />
               </p>
-              <p>{productData?.weight}</p>
+              <p>{product?.data.weight}</p>
             </div>
           </figcaption>
-        </a>
+        </Link>
       </figure>
     </div>
   );

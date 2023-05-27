@@ -7,6 +7,8 @@ function Footer() {
   const FooterContent = styled.div`
     display: block;
     margin: 25px;
+    flex-grow: 0;
+    flex-shrink: 0;
   `;
   return (
     <Footer>

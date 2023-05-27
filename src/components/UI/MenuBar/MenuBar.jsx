@@ -34,11 +34,11 @@ function MenuBar() {
         </ul>
 
         <div className="flex">
-          <Cart>
-            <Link to="/cart">
+          <Link to="/cart" >
+            <Cart className="h-full">
               <FaShoppingCart className="text-slate-900 dark:text-white h-full" />
-            </Link>
-          </Cart>
+            </Cart>
+          </Link>
           <ThemeSwitcher />
         </div>
       </nav>

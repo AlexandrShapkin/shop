@@ -2,7 +2,7 @@ import photo from "../about.png";
 
 function AboutPage() {
   return (
-    <div className="w-full py-5 bg-white dark:bg-slate-600 text-slate-900 dark:text-white">
+    <div className="w-full py-5">
       <div className="w-full flex flex-col items-center justify-center my-5">
         <h1 className="mb-5 text-4xl font-bold">О нас</h1>
         <div className="max-w-screen-sm mb-5 w-4/5 overflow-hidden rounded-md">
