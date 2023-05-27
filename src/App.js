@@ -12,6 +12,8 @@ import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import { useState } from "react";
 
+const NOT_FOUND = -1;
+
 const products = [
   {
     id: 1,
@@ -57,7 +59,7 @@ const products = [
     id: 3,
     photo: dumplings3,
     data: {
-      title: "Магический боевой круг gfdg dgdfg dfhdfgdfg ",
+      title: "Магический боевой круг",
       price: 520,
       weight: 380,
       spiciness: 5000,
@@ -75,12 +77,51 @@ const products = [
   },
 ];
 
+function makeCartObject(product, quantity = 1) {
+  let obj = new Object();
+  obj.id = product.id;
+  obj.photo = product.photo;
+  obj.title = product.data.title;
+  obj.price = product.data.price;
+  obj.quantity = quantity;
+
+  return obj;
+}
 
 function App() {
-  const [cartList, setCartList] = useState([...products]);
+  const [cartList, setCartList] = useState([]);
+
+  function indexInCart(product) {
+    for (let i = 0; i < cartList.length; i++) {
+      if (product.id === cartList[i].id) return i;
+    }
+    return NOT_FOUND;
+  }
+
+  function addToCart(product, quantity = 1) {
+    const index = indexInCart(product);
+    let newCartList = cartList.slice();
+
+    if (index !== NOT_FOUND) {
+      newCartList[index].quantity += quantity;
+    } else {
+      const cartObject = makeCartObject(product, quantity);
+      newCartList.push(cartObject);
+    }
+
+    setCartList(newCartList);
+  }
+
+  function updateCartList(product) {
+    const index = indexInCart(product);
+    if (index === NOT_FOUND) return;
+    let newCartList = cartList.slice();
+    newCartList[index] = product;
+    setCartList(newCartList);
+  }
 
   function deleteFromCartList(item) {
-    const newList = cartList.filter(el => el !== item);
+    const newList = cartList.filter((el) => el.id !== item.id);
     setCartList(newList);
   }
 
@@ -91,15 +132,31 @@ function App() {
           <Route path="about" element={<AboutPage />} />
           <Route
             path="products"
-            element={<ProductsListPage products={products} />}
+            element={
+              <ProductsListPage products={products} addToCart={addToCart} />
+            }
           />
           <Route path="vacancies" element={<VacanciesPage />} />
-          <Route path="cart" element={<CartPage cartList={cartList} removeFromCart={deleteFromCartList}/>} />
-          <Route path="*" element={<ProductsListPage products={products} />} />
+          <Route
+            path="cart"
+            element={
+              <CartPage
+                cartList={cartList}
+                removeFromCart={deleteFromCartList}
+                updateCartList={updateCartList}
+              />
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <ProductsListPage products={products} addToCart={addToCart} />
+            }
+          />
           {products.map((product) => (
             <Route
               path={"products/" + product.id}
-              element={<ProductPage product={product} />}
+              element={<ProductPage product={product} addToCart={addToCart} />}
               key={product.id}
             />
           ))}

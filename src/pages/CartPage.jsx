@@ -1,6 +1,6 @@
 import CartItem from "../components/UI/CartItem/CartItem";
 
-function CartPage({ cartList, removeFromCart }) {
+function CartPage({ cartList, removeFromCart, updateCartList }) {
   return (
     <div className="w-full">
       <div className="w-full flex flex-col items-center justify-center py-5">
@@ -8,7 +8,13 @@ function CartPage({ cartList, removeFromCart }) {
         <ul className="w-full flex flex-col items-center justify-center">
           {cartList ? (
             cartList.map((product) => (
-              <CartItem className="my-3" product={product} key={product.id} removeCurrent={removeFromCart} />
+              <CartItem
+                className="my-3"
+                product={product}
+                key={product.id}
+                removeCurrent={removeFromCart}
+                updateProduct={updateCartList}
+              />
             ))
           ) : (
             <div>

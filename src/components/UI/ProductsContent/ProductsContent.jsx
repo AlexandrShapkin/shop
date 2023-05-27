@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ProductCard from "../ProductCard/ProductCard";
 
-function ProductsContent({ title, products }) {
+function ProductsContent({ title, products, addToCart }) {
   const Wrapper = styled.div``;
   const Title = styled.h2`
     font-weight: 50;
@@ -19,6 +19,7 @@ function ProductsContent({ title, products }) {
             className="mx-2 mb-2"
             product={product}
             key={product?.id}
+            addToCart={addToCart}
           />
         ))}
       </div>
