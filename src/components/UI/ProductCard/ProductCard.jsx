@@ -1,5 +1,6 @@
 import { FaCartPlus, FaRubleSign } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import ProductImage from "../../ProductImage/ProductImage";
 
 function ProductCard({ product, className, addToCart }) {
   return (
@@ -17,12 +18,7 @@ function ProductCard({ product, className, addToCart }) {
           <FaCartPlus className="m-auto" />
         </button>
         <Link to={"/products/" + product?.id}>
-          <img
-            src={product?.photo}
-            loading="lazy"
-            alt=""
-            className="object-scale-down object-center"
-          />
+          <ProductImage photoBase64={product?.photo} />
           <figcaption className="p-3 flex justify-between h-22 sm:h-28 flex-col">
             <h3 className="text-sm">{product?.data.title}</h3>
             <div className="text-xs flex justify-between mt-2 text-zinc-500 dark:text-zinc-200">

@@ -1,4 +1,4 @@
-import photo from "../team.png";
+import photo from "../res/team.png";
 
 function VacanciesPage() {
   return (
