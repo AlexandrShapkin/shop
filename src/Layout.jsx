@@ -5,11 +5,11 @@ import Footer from "./components/Footer/Footer";
 import { Outlet } from "react-router-dom";
 
 
-function Layout() {
+function Layout({theme, setTheme}) {
   return (
     <div className="App">
       <Header logo={logo} />
-      <MenuBar />
+      <MenuBar theme={theme} setTheme={setTheme} />
       <div className="min-h-screen bg-white dark:bg-slate-600 text-slate-900 dark:text-white">
       <Outlet />
       </div>

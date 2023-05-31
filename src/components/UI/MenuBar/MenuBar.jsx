@@ -3,7 +3,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import { Link } from "react-router-dom";
 
-function MenuBar() {
+function MenuBar({theme, setTheme}) {
   const MenuItem = styled.li`
     padding: 5px 10px;
     &:hover {
@@ -39,7 +39,7 @@ function MenuBar() {
               <FaShoppingCart className="text-slate-900 dark:text-white h-full" />
             </Cart>
           </Link>
-          <ThemeSwitcher />
+          <ThemeSwitcher theme={theme} setTheme={setTheme} />
         </div>
       </nav>
       <hr className="w-full border border-y-slate-700 dark:border-y-white border-t-0" />

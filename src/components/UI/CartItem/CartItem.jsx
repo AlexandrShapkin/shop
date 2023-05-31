@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ProductImage from "../../ProductImage/ProductImage";
 import CartProductContent from "../CartProductContent/CartProductContent";
 
+
 function CartItem({ product, className, removeCurrent, updateProduct }) {
   const [price, setPrice] = useState(product.quantity * product.price);
   function setQuantity(quantity) {
@@ -12,6 +13,8 @@ function CartItem({ product, className, removeCurrent, updateProduct }) {
   useEffect(() => {
     setPrice(product.quantity * product.price);
   }, [product]);
+
+
 
   return (
     <li

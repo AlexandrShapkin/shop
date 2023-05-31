@@ -6,7 +6,7 @@ export const productDummyObject = {
   id: 0,
   photo: dummyImage,
   data: {
-    title: "~~~~~~~~~~~ ~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~ ~~~~~~~~~~~~~ ~~~~~~~~~~",
+    title: "~~~~~~~~~~~ ~~~~~~~~~~~~~~",
     price: 1,
     weight: 1,
     spiciness: 10000,

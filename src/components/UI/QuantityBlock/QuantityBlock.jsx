@@ -1,3 +1,5 @@
+import Button from "../Button/Button";
+
 function QuantityBlock({ quantity, setQuantity }) {
   function increment() {
     if (quantity === "") {
@@ -30,24 +32,24 @@ function QuantityBlock({ quantity, setQuantity }) {
 
   return (
     <div className="flex w-28 justify-between mt-2">
-      <button
+      <Button
         className="h-8 w-8 text-center bg-zinc-300 dark:bg-slate-700 rounded-md"
         onClick={() => decrement()}
       >
         -
-      </button>
+      </Button>
       <input
         className="h-8 w-8 text-center bg-zinc-200 dark:bg-slate-400 rounded-md"
         type="text"
         onChange={(e) => changeHandler(e.target.value)}
         value={quantity}
       />
-      <button
+      <Button
         className="h-8 w-8 text-center bg-zinc-300 dark:bg-slate-700 rounded-md"
         onClick={() => increment()}
       >
         +
-      </button>
+      </Button>
     </div>
   );
 }

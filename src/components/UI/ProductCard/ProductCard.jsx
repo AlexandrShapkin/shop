@@ -1,6 +1,7 @@
 import { FaCartPlus, FaRubleSign } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ProductImage from "../../ProductImage/ProductImage";
+import Button from "../Button/Button";
 
 function ProductCard({ product, className, addToCart }) {
   return (
@@ -11,12 +12,12 @@ function ProductCard({ product, className, addToCart }) {
       ].join(" ")}
     >
       <figure className="">
-        <button
-          className="absolute rounded-md bg-red-600 w-8 h-8 sm:w-6 sm:h-6 right-4 top-4 sm:right-2 sm:top-2"
+        <Button
+          className="absolute rounded-md bg-zinc-300 w-8 h-8 sm:w-6 sm:h-6 right-4 top-4 sm:right-2 sm:top-2"
           onClick={() => addToCart(product)}
         >
           <FaCartPlus className="m-auto" />
-        </button>
+        </Button>
         <Link to={"/products/" + product?.id}>
           <ProductImage photoBase64={product?.photo} />
           <figcaption className="p-3 flex justify-between h-22 sm:h-28 flex-col">

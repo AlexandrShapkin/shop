@@ -1,41 +1,57 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Layout from "./Layout";
 
-import ProductsListPage from "./pages/ProductsListPage";
-import ProductPage from "./pages/ProductPage";
-import VacanciesPage from "./pages/VacanciesPage";
 import AboutPage from "./pages/AboutPage";
 import CartPage from "./pages/CartPage";
+import ProductPage from "./pages/ProductPage";
+import ProductsListPage from "./pages/ProductsListPage";
+import VacanciesPage from "./pages/VacanciesPage";
 
-import { fetchProductsData } from "./utils/fetchData";
 import { productDummyObject } from "./utils/productDummy";
 
 import "./App.css";
+import { CookiesProvider, useCookies } from "react-cookie";
 
 const NOT_FOUND = -1;
 
-
-
 function App() {
+  const [theme, setTheme] = useState('');
   const [cartList, setCartList] = useState([]);
+  const [cookies, setCookies, removeCookies] = useCookies("cart", "theme");
   const [products, setProducts] = useState([productDummyObject]);
 
   useEffect(() => {
+    setTheme(cookies.theme);
     // fetchProductsData().then(productsData => {
     //   setProducts(productsData);
     // });
+    products.forEach(product => {
+      if (product.id in cookies.cart) {
+        setCartList([...cartList, makeCartObject(product, cookies.cart[product.id])]);
+      }
+    });
   }, []);
 
+  useEffect(() => {
+    let cart = {};
+    cartList.forEach(item => cart[item.id] = item.quantity);
+    setCookies("cart", cart);
+  }, [cartList]);
+
+  useEffect(() => {
+    setCookies("theme", theme);
+  }, [theme]);
+
   function makeCartObject(product, quantity = 1) {
-    let obj = new Object();
+    let obj = Object();
     obj.id = product.id;
     obj.photo = product.photo;
     obj.title = product.data.title;
     obj.price = product.data.price;
     obj.quantity = quantity;
-  
+
     return obj;
   }
 
@@ -74,43 +90,47 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="*" element={<Layout />}>
-          <Route path="about" element={<AboutPage />} />
-          <Route
-            path="products"
-            element={
-              <ProductsListPage products={products} addToCart={addToCart} />
-            }
-          />
-          <Route path="vacancies" element={<VacanciesPage />} />
-          <Route
-            path="cart"
-            element={
-              <CartPage
-                cartList={cartList}
-                removeFromCart={deleteFromCartList}
-                updateCartList={updateCartList}
-              />
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <ProductsListPage products={products} addToCart={addToCart} />
-            }
-          />
-          {products.map((product) => (
+    <CookiesProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="*" element={<Layout theme={theme} setTheme={setTheme} />}>
+            <Route path="about" element={<AboutPage />} />
             <Route
-              path={"products/" + product.id}
-              element={<ProductPage product={product} addToCart={addToCart} />}
-              key={product.id}
+              path="products"
+              element={
+                <ProductsListPage products={products} addToCart={addToCart} />
+              }
             />
-          ))}
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            <Route path="vacancies" element={<VacanciesPage />} />
+            <Route
+              path="cart"
+              element={
+                <CartPage
+                  cartList={cartList}
+                  removeFromCart={deleteFromCartList}
+                  updateCartList={updateCartList}
+                />
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <ProductsListPage products={products} addToCart={addToCart} />
+              }
+            />
+            {products.map((product) => (
+              <Route
+                path={"products/" + product.id}
+                element={
+                  <ProductPage product={product} addToCart={addToCart} />
+                }
+                key={product.id}
+              />
+            ))}
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </CookiesProvider>
   );
 }
 

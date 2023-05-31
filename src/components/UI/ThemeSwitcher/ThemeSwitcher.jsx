@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { FaRegLightbulb } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
-function ThemeSwitcher() {
-  const [theme, setTheme] = useState('');
+function ThemeSwitcher({theme, setTheme}) {
   function toggleTheme() {
     setTheme(theme === "dark" ? "" : "dark");
   }
