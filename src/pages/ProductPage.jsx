@@ -7,14 +7,14 @@ function ProductPage({ product, addToCart }) {
     <div className="w-full py-5">
       <div className="flex mx-auto  flex-wrap w-full max-w-screen-lg">
         <ProductImage
-          photoBase64={product?.photo}
+          image={product?.photo}
           className={"w-full sm:w-80 mx-10 my-5 rounded-md"}
         />
         <ProductDataContent product={product} addToCart={addToCart} />
       </div>
       <ProductAdditionalData
-        composition={product?.data.composition}
-        description={product?.data.description}
+        composition={product?.composition}
+        description={product?.description}
       />
     </div>
   );

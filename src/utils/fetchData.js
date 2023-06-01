@@ -1,6 +1,6 @@
 export async function fetchProductsData() {
   try {
-    const response = await fetch("/data");
+    const response = await fetch("/api/shop");
     if (!response.ok) {
       setTimeout(() => {
         return fetchProductsData();

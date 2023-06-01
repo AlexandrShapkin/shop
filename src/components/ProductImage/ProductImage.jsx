@@ -1,8 +1,8 @@
-function ProductImage({photoBase64, className}) {
+function ProductImage({image, className}) {
   return (
     <div className={[className, "overflow-hidden"].join(" ")}>
       <img
-        src={`data:image/png;base64,${photoBase64}`}
+        src={`/image/${image}`}
         loading="lazy"
         alt=""
         className="object-scale-down object-center w-full h-full"

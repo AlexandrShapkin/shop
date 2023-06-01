@@ -27,7 +27,7 @@ function CartItem({ product, className, removeCurrent, updateProduct }) {
     >
       <Link className="h-full w-32 min-w-max" to={"/products/" + product.id}>
         <ProductImage
-          photoBase64={product?.photo}
+          image={product?.photo}
           className={"h-full w-full rounded-md"}
         />
       </Link>

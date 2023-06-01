@@ -1,0 +1,10 @@
+{
+  "dbServer": {
+    "host": "db host",
+    "port": "db port",
+    "name": "db name"
+  },
+  "app": {
+    "port": "application port"
+  }
+}

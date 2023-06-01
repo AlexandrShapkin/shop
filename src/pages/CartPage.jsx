@@ -3,7 +3,7 @@ import CartItem from "../components/UI/CartItem/CartItem";
 import { FaRubleSign } from "react-icons/fa";
 import Button from "../components/UI/Button/Button";
 
-function CartPage({ cartList, removeFromCart, updateCartList }) {
+function CartPage({ cartList, removeFromCart, updateCartList, clearCartList }) {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -17,15 +17,15 @@ function CartPage({ cartList, removeFromCart, updateCartList }) {
 
   function orderButtonHandler() {
     let orderList = [];
-    cartList.map((product) =>
-      orderList.push({ id: product.id, quantity: product.quantity })
+    cartList.forEach((product) =>
+      orderList.push({ _id: product._id, quantity: product.quantity })
     );
     let orderObj = Object();
     orderObj.orderPositions = orderList;
     orderObj.totalPrice = totalPrice;
     orderObj.orderDate = new Date().toJSON();
     window.alert(JSON.stringify(orderObj, null, 1));
-    cartList.map((product) => removeFromCart(product));
+    clearCartList();
   }
 
   return (

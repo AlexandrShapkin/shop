@@ -18,7 +18,7 @@ function ProductsContent({ title, products, addToCart }) {
           <ProductCard
             className="mx-2 mb-2"
             product={product}
-            key={product?.id}
+            key={product?._id}
             addToCart={addToCart}
           />
         ))}

@@ -9,6 +9,8 @@ import ProductPage from "./pages/ProductPage";
 import ProductsListPage from "./pages/ProductsListPage";
 import VacanciesPage from "./pages/VacanciesPage";
 
+import { fetchProductsData } from "./utils/fetchData";
+
 import { productDummyObject } from "./utils/productDummy";
 
 import "./App.css";
@@ -17,26 +19,33 @@ import { CookiesProvider, useCookies } from "react-cookie";
 const NOT_FOUND = -1;
 
 function App() {
-  const [theme, setTheme] = useState('');
+  const [theme, setTheme] = useState("");
   const [cartList, setCartList] = useState([]);
-  const [cookies, setCookies, removeCookies] = useCookies("cart", "theme");
+  const [cookies, setCookies] = useCookies("cart", "theme");
   const [products, setProducts] = useState([productDummyObject]);
 
   useEffect(() => {
     setTheme(cookies.theme);
-    // fetchProductsData().then(productsData => {
-    //   setProducts(productsData);
-    // });
-    products.forEach(product => {
-      if (product.id in cookies.cart) {
-        setCartList([...cartList, makeCartObject(product, cookies.cart[product.id])]);
-      }
+    fetchProductsData().then((productsData) => {
+      setProducts(productsData);
     });
   }, []);
 
   useEffect(() => {
+    if (cookies["cart"]) {
+      let newCart = [];
+      products?.forEach((product) => {
+        if (product._id in cookies.cart) {
+          newCart.push(makeCartObject(product, cookies.cart[product._id]));
+        }
+      });
+      setCartList(newCart);
+    }
+  }, [products]);
+
+  useEffect(() => {
     let cart = {};
-    cartList.forEach(item => cart[item.id] = item.quantity);
+    cartList.forEach((item) => (cart[item._id] = item.quantity));
     setCookies("cart", cart);
   }, [cartList]);
 
@@ -46,10 +55,10 @@ function App() {
 
   function makeCartObject(product, quantity = 1) {
     let obj = Object();
-    obj.id = product.id;
+    obj._id = product._id;
     obj.photo = product.photo;
-    obj.title = product.data.title;
-    obj.price = product.data.price;
+    obj.title = product.title;
+    obj.price = product.price;
     obj.quantity = quantity;
 
     return obj;
@@ -57,7 +66,7 @@ function App() {
 
   function indexInCart(product) {
     for (let i = 0; i < cartList.length; i++) {
-      if (product.id === cartList[i].id) return i;
+      if (product._id === cartList[i]._id) return i;
     }
     return NOT_FOUND;
   }
@@ -85,15 +94,22 @@ function App() {
   }
 
   function deleteFromCartList(item) {
-    const newList = cartList.filter((el) => el.id !== item.id);
+    const newList = cartList.filter((el) => el._id !== item._id);
     setCartList(newList);
+  }
+
+  function clearCartList() {
+    setCartList([]);
   }
 
   return (
     <CookiesProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="*" element={<Layout theme={theme} setTheme={setTheme} />}>
+          <Route
+            path="*"
+            element={<Layout theme={theme} setTheme={setTheme} />}
+          >
             <Route path="about" element={<AboutPage />} />
             <Route
               path="products"
@@ -109,6 +125,7 @@ function App() {
                   cartList={cartList}
                   removeFromCart={deleteFromCartList}
                   updateCartList={updateCartList}
+                  clearCartList={clearCartList}
                 />
               }
             />
@@ -120,11 +137,11 @@ function App() {
             />
             {products.map((product) => (
               <Route
-                path={"products/" + product.id}
+                path={"products/" + product._id}
                 element={
                   <ProductPage product={product} addToCart={addToCart} />
                 }
-                key={product.id}
+                key={product._id}
               />
             ))}
           </Route>

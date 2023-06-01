@@ -1,6 +1,4 @@
-import dummyImage from "../res/dumplingDummyImageBase64";
-
-console.log(dummyImage);
+import dummyImage from "../res/dumplingDummyImage.jpg";
 
 export const productDummyObject = {
   id: 0,
