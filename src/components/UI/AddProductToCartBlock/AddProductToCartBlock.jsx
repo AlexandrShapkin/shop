@@ -8,9 +8,6 @@ import { GoX, GoCheck } from "react-icons/go";
 function AddProductToCartBlock({ product, addToCart }) {
   const [quantity, setQuantity] = useState(1);
 
-  function addButtonHandler() {
-  }
-
   const DEFAULT_ADD_TEXT = <div>Добавить <FaCartPlus className="m-auto inline" /></div>;
   const EVENT_ADD_TEXT = <div className="text-green-300">Добавлено <GoCheck className="m-auto inline" /></div>;
   const ERROR_ADD_TEXT = <div className="text-red-300">Ошибка <GoX className="m-auto inline" /></div>;
@@ -23,7 +20,7 @@ function AddProductToCartBlock({ product, addToCart }) {
       return;
     }
     setAddToCartText(EVENT_ADD_TEXT);
-    setTimeout(() => {setAddToCartText(DEFAULT_ADD_TEXT); addToCart(product)}, [500]);
+    setTimeout(() => {setAddToCartText(DEFAULT_ADD_TEXT); addToCart(product, quantity)}, [500]);
   }
 
   return (

@@ -11,7 +11,7 @@ function Header({ logo }) {
 
   const Title = styled.h1`
     font-weight: bold;
-    font-size: medium;
+    font-size: 14px;
     max-width: 100%;
   `;
 
